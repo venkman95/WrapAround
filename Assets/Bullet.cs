@@ -17,6 +17,12 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         OnBulletCreation(this,new BulletArgs {Bullet = gameObject });
+        GameManager.ClearBullets += GameManager_ClearBullets;
+    }
+
+    private void GameManager_ClearBullets(object sender, EventArgs e)
+    {
+        DestroyBullet();
     }
 
     // Update is called once per frame
@@ -37,6 +43,7 @@ public class Bullet : MonoBehaviour
     }
     public void DestroyBullet()
     {
+        GameManager.ClearBullets -= GameManager_ClearBullets;
         OnBulletDestruction(this, new BulletArgs { Bullet = gameObject });
         Destroy(gameObject);
     }

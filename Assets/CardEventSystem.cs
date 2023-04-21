@@ -32,10 +32,12 @@ public class CardEventSystem : MonoBehaviour
     }
 
     private void SpawnCards() {
-        foreach (GameObject bullet in manager.BulletList)
+
+        if (manager.BulletList.Count > 0)
         {
-            bullet.GetComponent<Bullet>().DestroyBullet();
+            manager.ClearAllBullets();
         }
+        
         manager.currentState = GameManager.State.PickingCards;
         LeftCard.gameObject.SetActive(true);
         RightCard.gameObject.SetActive(true);

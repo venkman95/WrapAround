@@ -5,6 +5,9 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+
+    public static event EventHandler ClearBullets;
+
     //State of the game
     public enum State { SpawnEnemies, WaitForSpawning ,Combat,SpawnCards,PickingCards};
     //PlayerHealth
@@ -47,7 +50,10 @@ public class GameManager : MonoBehaviour
         maxWidth = camera.pixelWidth;
     }
 
-
+    public void ClearAllBullets()
+    {
+        ClearBullets(this,EventArgs.Empty);
+    }
 
     private void VisibilityChecker_OnInvisibility(object sender,VisibilityChecker.VisibilityArgs e) {
         CheckforWrap(e.Object);

@@ -20,7 +20,7 @@ public class VisibilityChecker : MonoBehaviour
 
 
     private void AnnounceOffScreen() {
-        Debug.Log("OffScreen");
+        //Debug.Log("OffScreen");
         OnScreen = false;
         StartCoroutine(WaitToComeBack());
         if (gameObject.transform.parent != null) {

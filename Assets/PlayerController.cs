@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
+    AudioSource FireSFX;
+    [SerializeField]
     float Speed;
     [SerializeField]
     GameObject BulletSpawnPoint;
@@ -35,6 +37,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0)) {
             Instantiate(Bullet,BulletSpawnPoint.transform.position,BulletSpawnPoint.transform.rotation);
+            FireSFX.Play();
         }
         if (Input.GetMouseButtonDown(1)) {
             Instantiate(Bullet,BulletSpawnPoint.transform.position,BulletSpawnPoint.transform.rotation);
