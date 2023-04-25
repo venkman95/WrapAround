@@ -10,6 +10,8 @@ public class SFXManager : MonoBehaviour
     
     [SerializeField]
     AudioClip PlayerFireSFX;
+    [SerializeField]
+    AudioClip PlayerHitSFX;
 
     private void Start()
     {
@@ -19,6 +21,11 @@ public class SFXManager : MonoBehaviour
     public void PlayerFire()
     {
         FindASource(PlayerFireSFX);
+    }
+
+    public void PlayerHit()
+    {
+        FindASource(PlayerHitSFX);
     }
 
 

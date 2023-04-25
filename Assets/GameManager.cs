@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System;
 
 public class GameManager : MonoBehaviour
 {
-
+    [SerializeField]
+    UnityEvent HitPlayer;
     public static event EventHandler ClearBullets;
 
     //State of the game
@@ -69,6 +71,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void Bullet_HitPlayer(object sender,EventArgs e) {
+        HitPlayer.Invoke();
         CurrentPlayerHealth--;
         Debug.Log(CurrentPlayerHealth);
     }

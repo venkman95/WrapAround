@@ -386,6 +386,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d1a95bb4035ee4696ab46fb21aba0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HitPlayer:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 519420038}
+        m_TargetAssemblyTypeName: SFXManager, Assembly-CSharp
+        m_MethodName: PlayerHit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   MaxPlayerHealth: 10
   Player: {fileID: 567877672}
   camera: {fileID: 519420031}
@@ -549,6 +564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerFireSFX: {fileID: 8300000, guid: 2574561360a66114b89a5fb52d3f0ecb, type: 3}
+  PlayerHitSFX: {fileID: 8300000, guid: 343bd2923f26d6e44a0c66f203174faf, type: 3}
 --- !u!1 &567877672
 GameObject:
   m_ObjectHideFlags: 0
