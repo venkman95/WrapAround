@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
  
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    AudioSource FireSFX;
+    [SerializeField] private UnityEvent PlayerFire;
     [SerializeField]
     float Speed;
     [SerializeField]
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0)) {
             Instantiate(Bullet,BulletSpawnPoint.transform.position,BulletSpawnPoint.transform.rotation);
-            FireSFX.Play();
+            PlayerFire.Invoke();
         }
         if (Input.GetMouseButtonDown(1)) {
             Instantiate(Bullet,BulletSpawnPoint.transform.position,BulletSpawnPoint.transform.rotation);
