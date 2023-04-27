@@ -5,7 +5,13 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
-   
+    [SerializeField]
+    public enum EnemyType
+    {
+        Creeper,Turret,Tank
+    };
+    [SerializeField]
+    public EnemyType Typer;
     public static event EventHandler<EnemyArgs> OnEnemyCreation;
     public static event EventHandler<EnemyArgs> OnEnemyDestruction;
     public class EnemyArgs : EventArgs {

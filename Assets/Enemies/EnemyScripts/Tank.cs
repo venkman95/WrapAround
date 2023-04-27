@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Tank : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class Tank : MonoBehaviour
     [SerializeField]
     GameObject Gun;
     bool CanFire = true;
+
+    [SerializeField]
+    public static event EventHandler TankFire;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +51,7 @@ public class Tank : MonoBehaviour
             if (hit.transform.gameObject.tag == "Player" & CanFire) {
                 Instantiate(Bullet,FiringPoint.transform.position,FiringPoint.transform.rotation);
                 StartCoroutine(FiringDelay());
+                TankFire?.Invoke(this,EventArgs.Empty);
             }
         }
     }

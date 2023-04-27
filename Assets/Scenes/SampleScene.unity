@@ -551,6 +551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TestSong: {fileID: 8300000, guid: 1473a9f44651c654f87aa747f82a34f3, type: 3}
   Player: {fileID: 519420036}
+  Volume: 1
 --- !u!114 &519420038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -565,6 +566,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerFireSFX: {fileID: 8300000, guid: 2574561360a66114b89a5fb52d3f0ecb, type: 3}
   PlayerHitSFX: {fileID: 8300000, guid: 343bd2923f26d6e44a0c66f203174faf, type: 3}
+  TankFireSFX: {fileID: 8300000, guid: 314882592f8cfa54681507f55cc26604, type: 3}
+  TurretFireSFX: {fileID: 8300000, guid: fee5fdee6e498224b9b6bb7d4dbc163d, type: 3}
+  EnemyHitSFX: {fileID: 8300000, guid: b56e840f78bee554686922d808f6c977, type: 3}
+  CreeperDeathSFX: {fileID: 8300000, guid: 8e87871dd18640347b38a60dac5abfc1, type: 3}
+  TurretDeathSFX: {fileID: 8300000, guid: fd40c2c1b2dc62c48b90c4bebc101437, type: 3}
+  TankDeathSFX: {fileID: 8300000, guid: 4d971af2dbc00e54d9541e150667f514, type: 3}
 --- !u!1 &567877672
 GameObject:
   m_ObjectHideFlags: 0

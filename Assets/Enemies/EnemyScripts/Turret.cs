@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Turret : MonoBehaviour
 {
@@ -19,8 +20,8 @@ public class Turret : MonoBehaviour
     bool CanFire = true;
     [SerializeField]
     float FireDelay;
-
-
+    [SerializeField]
+    public static event EventHandler TurretFire;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +46,7 @@ public class Turret : MonoBehaviour
                 Instantiate(Bullet,FiringPoint.transform.position,FiringPoint.transform.rotation);
                 Instantiate(Bullet,FiringPoint2.transform.position,FiringPoint.transform.rotation);
                 StartCoroutine(FiringDelay());
+                TurretFire?.Invoke(this,EventArgs.Empty);
             }
         }
         

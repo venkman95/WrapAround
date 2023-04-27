@@ -9,13 +9,37 @@ public class SFXManager : MonoBehaviour
     List<AudioSource> AudioSources = new List<AudioSource>();
     
     [SerializeField]
-    AudioClip PlayerFireSFX;
+    public AudioClip PlayerFireSFX;
     [SerializeField]
-    AudioClip PlayerHitSFX;
+    public AudioClip PlayerHitSFX;
+    [SerializeField]
+    public AudioClip TankFireSFX;
+    [SerializeField]
+    public AudioClip TurretFireSFX;
+    [SerializeField]
+    public AudioClip EnemyHitSFX;
+    [SerializeField]
+    public AudioClip CreeperDeathSFX;
+    [SerializeField]
+    public AudioClip TurretDeathSFX;
+    [SerializeField]
+    public AudioClip TankDeathSFX;
 
     private void Start()
     {
         AudioSources.Add(gameObject.AddComponent<AudioSource>());
+        Tank.TankFire += Tank_TankFire;
+        Turret.TurretFire += Turret_TurretFire;
+    }
+
+    private void Turret_TurretFire(object sender, EventArgs e)
+    {
+        TurretFire();
+    }
+
+    private void Tank_TankFire(object sender, EventArgs e)
+    {
+        TankFire();
     }
 
     public void PlayerFire()
@@ -26,11 +50,44 @@ public class SFXManager : MonoBehaviour
     public void PlayerHit()
     {
         FindASource(PlayerHitSFX);
+        StartCoroutine(PlayerHitMute());
     }
 
+    public void TurretFire()
+    {
+        FindASource(TurretFireSFX);
+        FindASource(TurretFireSFX);
+    }
 
+    public void TankFire()
+    {
+        FindASource(TankFireSFX);
+    
+    }
 
+    IEnumerator PlayerHitMute()
+    {
+        
+        MusicPlayer musicPlayer = GetComponent<MusicPlayer>();
+        musicPlayer.Player.volume = .25f;
 
+        foreach (AudioSource source in AudioSources)
+        {
+            if (source.clip != PlayerHitSFX)
+            {
+                source.mute = true;
+            }
+        }
+        yield return new WaitForSeconds(PlayerHitSFX.length);
+        
+        foreach (AudioSource source in AudioSources)
+        {
+   
+            source.mute = false;      
+        }
+        musicPlayer.Player.volume = 1f;
+        yield return null;
+    }
     private void FindASource(AudioClip clip)
     {
         bool FoundUnusedAudioSource = false;
