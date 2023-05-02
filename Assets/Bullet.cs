@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     public static event EventHandler<BulletArgs> OnBulletCreation;
     public static event EventHandler<BulletArgs> OnBulletDestruction;
     public static event EventHandler HitPlayer;
+    public static event EventHandler HitEnemy;
     public class BulletArgs: EventArgs {
         public GameObject Bullet;
     }
@@ -37,6 +38,7 @@ public class Bullet : MonoBehaviour
             HitPlayer(this,EventArgs.Empty);
         }
         if (collision.transform.parent.tag == "Enemy") {
+            HitEnemy(this,EventArgs.Empty);
             collision.transform.parent.GetComponent<Enemy>().Hit();
         }
         DestroyBullet();

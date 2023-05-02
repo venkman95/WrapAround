@@ -30,6 +30,37 @@ public class SFXManager : MonoBehaviour
         AudioSources.Add(gameObject.AddComponent<AudioSource>());
         Tank.TankFire += Tank_TankFire;
         Turret.TurretFire += Turret_TurretFire;
+        Bullet.HitEnemy += Bullet_HitEnemy;
+        Bullet.HitPlayer += Bullet_HitPlayer;
+        Enemy.OnEnemyDestruction += Enemy_OnEnemyDestruction;
+    }
+
+    private void Enemy_OnEnemyDestruction(object sender, Enemy.EnemyArgs e)
+    {
+        switch (e.enemy.gameObject.GetComponent<Enemy>().Type)
+        {
+            case Enemy.EnemyType.Creeper:
+                CreeperDeath();
+                break;
+            case Enemy.EnemyType.Turret:
+                TurretDeath();
+                break;
+            case Enemy.EnemyType.Tank:
+                TankDeath();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void Bullet_HitPlayer(object sender, EventArgs e)
+    {
+        PlayerHit();
+    }
+
+    private void Bullet_HitEnemy(object sender, EventArgs e)
+    {
+        EnemyHit();
     }
 
     private void Turret_TurretFire(object sender, EventArgs e)
@@ -50,7 +81,7 @@ public class SFXManager : MonoBehaviour
     public void PlayerHit()
     {
         FindASource(PlayerHitSFX);
-        StartCoroutine(PlayerHitMute());
+        StartCoroutine(ImportantSoundCue(PlayerHitSFX));
     }
 
     public void TurretFire()
@@ -64,26 +95,45 @@ public class SFXManager : MonoBehaviour
         FindASource(TankFireSFX);
     
     }
+    public void EnemyHit()
+    {
+        FindASource(EnemyHitSFX);
+    }
 
-    IEnumerator PlayerHitMute()
+    public void CreeperDeath()
+    {
+        FindASource(CreeperDeathSFX);
+        StartCoroutine(ImportantSoundCue(CreeperDeathSFX));
+    }
+    public void TurretDeath()
+    {
+        FindASource(TurretDeathSFX);
+        StartCoroutine(ImportantSoundCue(TurretDeathSFX));
+    }
+    public void TankDeath()
+    {
+        FindASource(TankDeathSFX);
+        StartCoroutine(ImportantSoundCue(TankDeathSFX));
+    }
+    IEnumerator ImportantSoundCue(AudioClip clip)
     {
         
         MusicPlayer musicPlayer = GetComponent<MusicPlayer>();
-        musicPlayer.Player.volume = .25f;
+        musicPlayer.Player.volume = .15f;
 
         foreach (AudioSource source in AudioSources)
         {
-            if (source.clip != PlayerHitSFX)
+            if (source.clip != clip)
             {
-                source.mute = true;
+                source.volume = .5f;
             }
         }
-        yield return new WaitForSeconds(PlayerHitSFX.length);
+        yield return new WaitForSeconds(clip.length);
         
         foreach (AudioSource source in AudioSources)
         {
    
-            source.mute = false;      
+            source.volume = 1f;      
         }
         musicPlayer.Player.volume = 1f;
         yield return null;

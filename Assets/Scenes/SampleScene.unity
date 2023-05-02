@@ -326,7 +326,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -386,21 +386,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d1a95bb4035ee4696ab46fb21aba0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HitPlayer:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 519420038}
-        m_TargetAssemblyTypeName: SFXManager, Assembly-CSharp
-        m_MethodName: PlayerHit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   MaxPlayerHealth: 10
   Player: {fileID: 567877672}
   camera: {fileID: 519420031}
@@ -423,8 +408,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnableEnemies:
   - {fileID: 3635711848154250572, guid: 1b8c63a2c70cb0a4fb7d8c47658196fc, type: 3}
-  - {fileID: 8198538328680923938, guid: 43219ac9c0af9474d9bf2d141389e4d8, type: 3}
-  - {fileID: 5457097572378168374, guid: 826ba8f370c2c7041b122fb28834a2d7, type: 3}
 --- !u!114 &519420035
 MonoBehaviour:
   m_ObjectHideFlags: 0

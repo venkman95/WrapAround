@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
         Creeper,Turret,Tank
     };
     [SerializeField]
-    public EnemyType Typer;
+    public EnemyType Type;
     public static event EventHandler<EnemyArgs> OnEnemyCreation;
     public static event EventHandler<EnemyArgs> OnEnemyDestruction;
     public class EnemyArgs : EventArgs {
