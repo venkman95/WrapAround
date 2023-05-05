@@ -83,9 +83,12 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    
 
 
+    private void Update()
+    {
+        CheckforWrap(Player);
+    }
 
     private void CheckforWrap(GameObject Object) {
         Vector2 objectScreenPosition = camera.WorldToScreenPoint(Object.transform.position);
@@ -99,7 +102,7 @@ public class GameManager : MonoBehaviour
             
             //Debug.Log("Touching the edge");
         }
-        if (objectScreenPosition.y < 0) {
+        if (objectScreenPosition.y < 0f) {
             WrapUp(objectScreenPosition,Object);
             
             //Debug.Log("Touching the edge");

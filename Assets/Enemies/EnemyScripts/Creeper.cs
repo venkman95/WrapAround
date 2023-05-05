@@ -21,7 +21,7 @@ public class Creeper : MonoBehaviour
     List<Vector3> InsidePoints = new List<Vector3>();
     // Start is called before the first frame update
     void Start() {
-        Target = FindObjectOfType<Camera>().GetComponent<GameManager>().Player;
+        Target = Camera.main.GetComponent<GameManager>().Player;
         StartCoroutine(InsideRadius());
     }
 
