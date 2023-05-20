@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //Sets up the visibility checker used on all objects that wrap around
-        VisibilityChecker.OnInvisibility += VisibilityChecker_OnInvisibility;
+        
         //Player Health set to max
         CurrentPlayerHealth = MaxPlayerHealth;
         //Sets Up the lists for enemies and bullets
@@ -53,10 +53,6 @@ public class GameManager : MonoBehaviour
     public void ClearAllBullets()
     {
         ClearBullets(this,EventArgs.Empty);
-    }
-
-    private void VisibilityChecker_OnInvisibility(object sender,VisibilityChecker.VisibilityArgs e) {
-        CheckforWrap(e.Object);
     }
 
     private void Enemy_OnEnemyDestruction(object sender,Enemy.EnemyArgs e) {
@@ -88,6 +84,14 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         CheckforWrap(Player);
+        foreach (GameObject bullet in BulletList)
+        {
+            CheckforWrap(bullet);
+        }
+        foreach (GameObject enemy in EnemyList)
+        {
+            CheckforWrap(enemy);
+        }
     }
 
     private void CheckforWrap(GameObject Object) {
