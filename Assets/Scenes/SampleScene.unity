@@ -288,6 +288,7 @@ GameObject:
   - component: {fileID: 519420037}
   - component: {fileID: 519420036}
   - component: {fileID: 519420038}
+  - component: {fileID: 519420039}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -546,6 +547,22 @@ MonoBehaviour:
   CreeperDeathSFX: {fileID: 8300000, guid: 8e87871dd18640347b38a60dac5abfc1, type: 3}
   TurretDeathSFX: {fileID: 8300000, guid: fd40c2c1b2dc62c48b90c4bebc101437, type: 3}
   TankDeathSFX: {fileID: 8300000, guid: 4d971af2dbc00e54d9541e150667f514, type: 3}
+--- !u!114 &519420039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e208944865740bb42947f44e1c6d16e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OneRoundStar: {fileID: 1808643595166227180, guid: b738bc1ee0a33d74099867d7ed3f6ca3, type: 3}
+  FiveRoundStar: {fileID: 8084261795558173624, guid: 82ad7aae66dd01640aa547e816c3a604, type: 3}
+  TenRoundStar: {fileID: 7117971125811281937, guid: b592ff0e36f3dfc4b82265c129b4d359, type: 3}
+  Manager: {fileID: 519420033}
 --- !u!1 &567877672
 GameObject:
   m_ObjectHideFlags: 0

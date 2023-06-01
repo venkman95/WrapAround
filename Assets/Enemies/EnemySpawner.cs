@@ -1,9 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public static event EventHandler<RoundArgs> RoundOver;
+    public class RoundArgs : EventArgs
+    {
+        public int Rounds;
+    }
+   
     [SerializeField]
     List<GameObject> SpawnableEnemies = new List<GameObject>();
     GameManager Manager;
@@ -12,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         Manager = GetComponent<GameManager>();
-        Rounds = 1;
+        Rounds = 0;
         //SpawnEnemies();
     }
 
@@ -30,6 +37,7 @@ public class EnemySpawner : MonoBehaviour
             case GameManager.State.Combat:
                 if (Manager.EnemyList.Count == 0) {
                     Rounds++;
+                    RoundOver(this,new RoundArgs { Rounds = Rounds });
                     Manager.currentState = GameManager.State.SpawnCards;
                 }
                 break;
@@ -39,14 +47,14 @@ public class EnemySpawner : MonoBehaviour
     }
 
     public void SpawnEnemies() {
-        for (int i = 0; i < Rounds; i++) {
-            float yPositionPixel = Random.Range(0,Manager.maxHeight);
-            float xPositionPixel = Random.Range(0,Manager.maxWidth);
+        for (int i = 0; i < Rounds+1; i++) {
+            float yPositionPixel = UnityEngine.Random.Range(0,Manager.maxHeight);
+            float xPositionPixel = UnityEngine.Random.Range(0,Manager.maxWidth);
             Vector3 temp = new Vector3(xPositionPixel,yPositionPixel,0);
             temp = Manager.camera.ScreenToWorldPoint(temp);
             Vector3 spawnPoint = new Vector3(temp.x,temp.y,0);
 
-            Instantiate(SpawnableEnemies[Random.Range(0,SpawnableEnemies.Count)],spawnPoint,transform.rotation);
+            Instantiate(SpawnableEnemies[UnityEngine.Random.Range(0,SpawnableEnemies.Count)],spawnPoint,transform.rotation);
         }
        ;
     }
