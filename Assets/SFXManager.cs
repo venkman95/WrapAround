@@ -135,7 +135,7 @@ public class SFXManager : MonoBehaviour
    
             source.volume = 1f;      
         }
-        musicPlayer.Player.volume = 1f;
+        musicPlayer.Player.volume = .85f;
         yield return null;
     }
     private void FindASource(AudioClip clip)

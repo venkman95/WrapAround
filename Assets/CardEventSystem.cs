@@ -10,7 +10,7 @@ public class CardEventSystem : MonoBehaviour
     [SerializeField]
     CardTrigger RightCard;
     [SerializeField]
-    CardData test;
+    List<CardData> CardList = new List<CardData>();
     [SerializeField]
     GameManager manager;
     //CardTrigger RightCard;
@@ -18,12 +18,18 @@ public class CardEventSystem : MonoBehaviour
     void Start()
     {
         CardTrigger.OnCardTriggered += CardTrigger_OnCardTriggered;
-        LeftCard.Title.text = test.Title;
-        LeftCard.Description.text = test.Description;
-        LeftCard.Effect = test.Effect;
-        RightCard.Title.text = test.Title;
-        RightCard.Description.text = test.Description;
-        RightCard.Effect = test.Effect;
+        SelectCards();
+    }
+    void SelectCards()
+    {
+        CardData temp = CardList[UnityEngine.Random.Range(0, CardList.Count)];
+        LeftCard.Title.text = temp.Title;
+        LeftCard.Description.text = temp.Description;
+        LeftCard.Effect = temp.Effect;
+        temp = CardList[UnityEngine.Random.Range(0, CardList.Count)];
+        RightCard.Title.text = temp.Title;
+        RightCard.Description.text = temp.Description;
+        RightCard.Effect = temp.Effect;
     }
     private void Update() {
         if (manager.currentState == GameManager.State.SpawnCards) {
@@ -49,6 +55,6 @@ public class CardEventSystem : MonoBehaviour
         manager.currentState = GameManager.State.SpawnEnemies;
         LeftCard.gameObject.SetActive(false);
         RightCard.gameObject.SetActive(false);
-        
+        SelectCards();
     }
 }

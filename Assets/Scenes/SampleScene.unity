@@ -414,7 +414,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LeftCard: {fileID: 494542618}
   RightCard: {fileID: 1354183481}
-  test: {fileID: 11400000, guid: ff321c67e58f7514ebb60302e5d62ae1, type: 2}
+  CardList:
+  - {fileID: 11400000, guid: ff321c67e58f7514ebb60302e5d62ae1, type: 2}
+  - {fileID: 11400000, guid: fe4d3c0315496b642a4c81af4e35c3b5, type: 2}
+  - {fileID: 11400000, guid: 763816ece7feea246821f24262f60168, type: 2}
   manager: {fileID: 519420033}
 --- !u!82 &519420036
 AudioSource:
@@ -428,7 +431,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.85
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -526,7 +529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TestSong: {fileID: 8300000, guid: 1473a9f44651c654f87aa747f82a34f3, type: 3}
   Player: {fileID: 519420036}
-  Volume: 1
+  Volume: 0.85
 --- !u!114 &519420038
 MonoBehaviour:
   m_ObjectHideFlags: 0

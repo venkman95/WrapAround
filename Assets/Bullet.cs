@@ -13,10 +13,12 @@ public class Bullet : MonoBehaviour
         public GameObject Bullet;
     }
     [SerializeField]
-    float speed;
+    public float currentspeed;
+    public float maximumspeed;
     // Start is called before the first frame update
     void Start()
     {
+        maximumspeed = currentspeed;
         OnBulletCreation(this,new BulletArgs {Bullet = gameObject });
         GameManager.ClearBullets += GameManager_ClearBullets;
     }
@@ -29,7 +31,7 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = transform.position + (transform.up * speed) * Time.deltaTime;
+        transform.position = transform.position + (transform.up * currentspeed) * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
