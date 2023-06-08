@@ -418,6 +418,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ff321c67e58f7514ebb60302e5d62ae1, type: 2}
   - {fileID: 11400000, guid: fe4d3c0315496b642a4c81af4e35c3b5, type: 2}
   - {fileID: 11400000, guid: 763816ece7feea246821f24262f60168, type: 2}
+  - {fileID: 11400000, guid: ae294c2b109b8aa4388f59a28cc64a32, type: 2}
   manager: {fileID: 519420033}
 --- !u!82 &519420036
 AudioSource:
