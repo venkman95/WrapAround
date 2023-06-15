@@ -67,7 +67,7 @@ public class Creeper : MonoBehaviour
                 if ((bullet.transform.position.x - transform.position.x) * (bullet.transform.position.x - transform.position.x) + (bullet.transform.position.y - transform.position.y) * (bullet.transform.position.y - transform.position.y) <= 2.5 * 2.5)
                 {
                     InsidePoints.Add(bullet.transform.position);
-                    Debug.Log("Inside Radius");
+                    //Debug.Log("Inside Radius");
                 }
             }
             if (InsidePoints.Count > 0)

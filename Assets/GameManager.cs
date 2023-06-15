@@ -7,19 +7,20 @@ using System;
 public class GameManager : MonoBehaviour
 {
     public static event EventHandler ClearBullets;
-
+    //PlayerAnimator
+    [SerializeField]
+    Animator PlayerAnimator;
     //State of the game
-    public enum State { SpawnEnemies, WaitForSpawning ,Combat,SpawnCards,PickingCards};
-    //PlayerHealth
+    public enum State { SpawnEnemies, WaitForSpawning ,Combat,SpawnCards,PickingCards,GameOver};
+    //PlayerData
     [SerializeField]
     int MaxPlayerHealth;
     int CurrentPlayerHealth;
-
-    //[SerializeField]
-    //SpriteRenderer ObjectSprite;
-    //Player
+    bool PlayerInvulnerability = false;
+    //PlayerObject
     [SerializeField]
     public GameObject Player;
+    
 
     //Setup for the WrapAroundSystem
     [SerializeField]
@@ -57,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     private void Enemy_OnEnemyDestruction(object sender,Enemy.EnemyArgs e) {
         EnemyList.Remove(e.enemy);
-        Debug.Log(EnemyList.Count);
+        //Debug.Log(EnemyList.Count);
     }
 
     void Enemy_OnEnemyCreation(object sender,Enemy.EnemyArgs e) {
@@ -65,7 +66,11 @@ public class GameManager : MonoBehaviour
     }
 
     private void Bullet_HitPlayer(object sender,EventArgs e) {
-        CurrentPlayerHealth--;
+        if (!PlayerInvulnerability)
+        {
+            CurrentPlayerHealth--;
+            StartCoroutine(PlayerInvulnerabilityState());
+        }
         Debug.Log(CurrentPlayerHealth);
     }
 
@@ -145,5 +150,17 @@ public class GameManager : MonoBehaviour
         Vector2 newObjectX = new Vector2(objectScreenPosition.x + maxWidth,objectScreenPosition.y);
         Object.transform.position = (camera.ScreenToWorldPoint(newObjectX));
         Object.transform.position = new Vector3(Object.transform.position.x,Object.transform.position.y,0);
+    }
+
+    IEnumerator PlayerInvulnerabilityState()
+    {
+        
+        Debug.Log("Invulnerable");
+        float InvulTime = 5f;
+        PlayerInvulnerability = true;
+        yield return new WaitForSeconds(InvulTime + (MaxPlayerHealth - CurrentPlayerHealth));
+        PlayerInvulnerability = false;
+        Debug.Log("Vulnerable");
+        yield return null;
     }
 }
