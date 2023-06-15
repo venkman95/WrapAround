@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject BulletSpawnPoint;
     [SerializeField]
-    GameObject Bullet;
+    public GameObject Bullet;
     // Start is called before the first frame update
     void Start()
     {

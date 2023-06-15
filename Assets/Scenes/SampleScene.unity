@@ -419,6 +419,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fe4d3c0315496b642a4c81af4e35c3b5, type: 2}
   - {fileID: 11400000, guid: 763816ece7feea246821f24262f60168, type: 2}
   - {fileID: 11400000, guid: ae294c2b109b8aa4388f59a28cc64a32, type: 2}
+  - {fileID: 11400000, guid: 8cbcadadd264db841ab7dbbc44d1ba0f, type: 2}
   manager: {fileID: 519420033}
 --- !u!82 &519420036
 AudioSource:
@@ -1021,6 +1022,10 @@ PrefabInstance:
     - target: {fileID: 4179014066454719534, guid: 49bf3280b6143e146a6507c16a7f26f6, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179014066467209532, guid: 49bf3280b6143e146a6507c16a7f26f6, type: 3}
+      propertyPath: m_Color.a
+      value: 0.3882353
       objectReference: {fileID: 0}
     - target: {fileID: 4179014066467209534, guid: 49bf3280b6143e146a6507c16a7f26f6, type: 3}
       propertyPath: m_Layer
