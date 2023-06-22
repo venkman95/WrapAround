@@ -154,13 +154,28 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PlayerInvulnerabilityState()
     {
-        
         Debug.Log("Invulnerable");
         float InvulTime = 5f;
         PlayerInvulnerability = true;
+        StartCoroutine(PlayerInvulenerabilityAnimation(InvulTime + (MaxPlayerHealth - CurrentPlayerHealth)));
         yield return new WaitForSeconds(InvulTime + (MaxPlayerHealth - CurrentPlayerHealth));
         PlayerInvulnerability = false;
         Debug.Log("Vulnerable");
+        yield return null;
+    }
+    IEnumerator PlayerInvulenerabilityAnimation(float WaitTime)
+    {
+        float currentTime = 0f;
+        PlayerAnimator.speed = 1f;
+        PlayerAnimator.Play("PlayerHurtAnimation");  
+        while (currentTime < WaitTime)
+        {
+            yield return new WaitForEndOfFrame();
+            currentTime += Time.deltaTime;
+            //Debug.Log(currentTime);
+            PlayerAnimator.speed += Time.deltaTime;
+        }
+        PlayerAnimator.Play("NormalState");
         yield return null;
     }
 }
