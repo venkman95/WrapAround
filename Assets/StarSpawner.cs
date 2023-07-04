@@ -16,6 +16,10 @@ public class StarSpawner : MonoBehaviour
     {
         EnemySpawner.RoundOver += EnemySpawner_RoundOver;
     }
+    private void OnDestroy()
+    {
+        EnemySpawner.RoundOver -= EnemySpawner_RoundOver;
+    }
 
     private void EnemySpawner_RoundOver(object sender, EnemySpawner.RoundArgs e)
     {

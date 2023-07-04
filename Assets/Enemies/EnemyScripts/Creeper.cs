@@ -16,11 +16,16 @@ public class Creeper : MonoBehaviour
     GameObject Target;
     [SerializeField]
     float speed;
+    [SerializeField]
+    float stamina;
+    [SerializeField]
+    float MaxStamina;
     CreeperStates currentState = CreeperStates.Follow;
 
     List<Vector3> InsidePoints = new List<Vector3>();
     // Start is called before the first frame update
     void Start() {
+        stamina = MaxStamina;
         Target = Camera.main.GetComponent<GameManager>().Player;
         StartCoroutine(InsideRadius());
     }
@@ -35,6 +40,7 @@ public class Creeper : MonoBehaviour
                 transform.position += FollowVector.normalized * speed * Time.deltaTime;
                 Clockwise.transform.Rotate(new Vector3(0, 0, -100) * Time.deltaTime);
                 Counter.transform.Rotate(new Vector3(0, 0, 99) * Time.deltaTime);
+                stamina += Time.deltaTime;
                 break;
             case CreeperStates.Flee:
                 Vector3 temp = new Vector3(0,0,0);
@@ -44,16 +50,18 @@ public class Creeper : MonoBehaviour
                 }
                 Vector3 AveragedVector = temp / InsidePoints.Count;
                 Vector3 FleeVector = (-AveragedVector + transform.position);
-                transform.position += FleeVector.normalized * (speed*2.5f) * Time.deltaTime;
+                transform.position += FleeVector.normalized * (speed + stamina) * Time.deltaTime;
+                stamina -= stamina * Time.deltaTime;
                 Clockwise.transform.Rotate(new Vector3(0, 0, 99) * Time.deltaTime);
                 Counter.transform.Rotate(new Vector3(0, 0, -100) * Time.deltaTime);
                 break;
             default:
                 break;
+
         }
 
 
-        
+        Mathf.Clamp(stamina, -1f, MaxStamina);
     }
 
 

@@ -6,6 +6,7 @@ using System;
 [Serializable]
 public class SFXManager : MonoBehaviour
 {
+    [SerializeField]
     List<AudioSource> AudioSources = new List<AudioSource>();
     
     [SerializeField]
@@ -25,7 +26,7 @@ public class SFXManager : MonoBehaviour
     [SerializeField]
     public AudioClip TankDeathSFX;
 
-    private void Start()
+    private void Awake()
     {
         AudioSources.Add(gameObject.AddComponent<AudioSource>());
         Tank.TankFire += Tank_TankFire;
@@ -34,7 +35,14 @@ public class SFXManager : MonoBehaviour
         Bullet.HitPlayer += Bullet_HitPlayer;
         Enemy.OnEnemyDestruction += Enemy_OnEnemyDestruction;
     }
-
+    private void OnDestroy()
+    {
+        Tank.TankFire -= Tank_TankFire;
+        Turret.TurretFire -= Turret_TurretFire;
+        Bullet.HitEnemy -= Bullet_HitEnemy;
+        Bullet.HitPlayer -= Bullet_HitPlayer;
+        Enemy.OnEnemyDestruction -= Enemy_OnEnemyDestruction;
+    }
     private void Enemy_OnEnemyDestruction(object sender, Enemy.EnemyArgs e)
     {
         switch (e.enemy.gameObject.GetComponent<Enemy>().Type)
@@ -143,7 +151,7 @@ public class SFXManager : MonoBehaviour
         bool FoundUnusedAudioSource = false;
         foreach (AudioSource source in AudioSources)
         {
-            if (!source.isPlaying)
+            if (!source.isPlaying )
             {
                 PlaySource(source, clip);
                 FoundUnusedAudioSource = true;

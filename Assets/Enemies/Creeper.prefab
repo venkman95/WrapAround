@@ -297,6 +297,8 @@ MonoBehaviour:
   Counter: {fileID: 3635711847838983526}
   Target: {fileID: 0}
   speed: 2
+  stamina: 0
+  MaxStamina: 5
 --- !u!114 &-4598317993569057450
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,7 +18,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     int MaxPlayerHealth;
     int CurrentPlayerHealth;
+    [SerializeField]
     bool PlayerInvulnerability = false;
+    [SerializeField]
+    Image PlayerHealthCircle;
     //PlayerObject
     [SerializeField]
     public GameObject Player;
@@ -32,8 +37,9 @@ public class GameManager : MonoBehaviour
     public State currentState = State.SpawnEnemies;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        camera = Camera.main;
         //Sets up the visibility checker used on all objects that wrap around
         
         //Player Health set to max
@@ -45,10 +51,19 @@ public class GameManager : MonoBehaviour
         Bullet.HitPlayer += Bullet_HitPlayer;
         Enemy.OnEnemyCreation += Enemy_OnEnemyCreation;
         Enemy.OnEnemyDestruction += Enemy_OnEnemyDestruction;
-        //Debug.Log(Screen.safeArea);
+        Debug.Log(Screen.safeArea);
         //Debug.Log(playerSprite.sprite.rect.size);
         maxHeight = camera.pixelHeight;
         maxWidth = camera.pixelWidth;
+    }
+    private void OnDestroy()
+    {
+        Bullet.OnBulletCreation -= Bullet_OnBulletCreation;
+        Bullet.OnBulletDestruction -= Bullet_OnBulletDestruction;
+        //Sets up what happens when bullet hits player
+        Bullet.HitPlayer -= Bullet_HitPlayer;
+        Enemy.OnEnemyCreation -= Enemy_OnEnemyCreation;
+        Enemy.OnEnemyDestruction -= Enemy_OnEnemyDestruction;
     }
 
     public void ClearAllBullets()
@@ -88,6 +103,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        PlayerHealthCircle.fillAmount = (float)CurrentPlayerHealth / (float)MaxPlayerHealth;
+        if (CurrentPlayerHealth <=0)
+        {
+            SceneManager.LoadScene(0);
+        }
+        //health.fillAmount = time / fillTime;
         CheckforWrap(Player);
         foreach (GameObject bullet in BulletList)
         {
@@ -155,7 +176,7 @@ public class GameManager : MonoBehaviour
     IEnumerator PlayerInvulnerabilityState()
     {
         Debug.Log("Invulnerable");
-        float InvulTime = 5f;
+        float InvulTime = 1f;
         PlayerInvulnerability = true;
         StartCoroutine(PlayerInvulenerabilityAnimation(InvulTime + (MaxPlayerHealth - CurrentPlayerHealth)));
         yield return new WaitForSeconds(InvulTime + (MaxPlayerHealth - CurrentPlayerHealth));

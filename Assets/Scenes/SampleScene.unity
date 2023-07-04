@@ -379,7 +379,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerAnimator: {fileID: 567877675}
-  MaxPlayerHealth: 10
+  MaxPlayerHealth: 5
+  PlayerInvulnerability: 0
+  PlayerHealthCircle: {fileID: 1207411095}
   Player: {fileID: 567877672}
   camera: {fileID: 519420031}
   BulletList: []
@@ -545,6 +547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11338b084524f834f95b774f0813fd71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AudioSources: []
   PlayerFireSFX: {fileID: 8300000, guid: 2574561360a66114b89a5fb52d3f0ecb, type: 3}
   PlayerHitSFX: {fileID: 8300000, guid: 343bd2923f26d6e44a0c66f203174faf, type: 3}
   TankFireSFX: {fileID: 8300000, guid: 314882592f8cfa54681507f55cc26604, type: 3}
