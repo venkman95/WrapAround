@@ -15,10 +15,14 @@ public class CardEventSystem : MonoBehaviour
     GameManager manager;
     //CardTrigger RightCard;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         CardTrigger.OnCardTriggered += CardTrigger_OnCardTriggered;
         SelectCards();
+    }
+    private void OnDestroy()
+    {
+        CardTrigger.OnCardTriggered -= CardTrigger_OnCardTriggered;
     }
     void SelectCards()
     {

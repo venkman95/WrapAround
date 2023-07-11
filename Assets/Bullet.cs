@@ -16,11 +16,15 @@ public class Bullet : MonoBehaviour
     public float currentspeed;
     public float maximumspeed;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         maximumspeed = currentspeed;
         OnBulletCreation(this,new BulletArgs {Bullet = gameObject });
         GameManager.ClearBullets += GameManager_ClearBullets;
+    }
+    private void OnDestroy()
+    {
+        GameManager.ClearBullets -= GameManager_ClearBullets;
     }
 
     private void GameManager_ClearBullets(object sender, EventArgs e)

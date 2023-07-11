@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     int MaxPlayerHealth;
     int CurrentPlayerHealth;
     [SerializeField]
-    bool PlayerInvulnerability = false;
+    public bool PlayerInvulnerability = false;
     [SerializeField]
     Image PlayerHealthCircle;
     //PlayerObject
@@ -79,14 +79,18 @@ public class GameManager : MonoBehaviour
     void Enemy_OnEnemyCreation(object sender,Enemy.EnemyArgs e) {
         EnemyList.Add(e.enemy);
     }
-
-    private void Bullet_HitPlayer(object sender,EventArgs e) {
+    public void HitPlayer(int Damage)
+    {
         if (!PlayerInvulnerability)
         {
-            CurrentPlayerHealth--;
+            CurrentPlayerHealth -= Damage;
             StartCoroutine(PlayerInvulnerabilityState());
         }
         Debug.Log(CurrentPlayerHealth);
+    }
+
+    private void Bullet_HitPlayer(object sender,EventArgs e) {
+        HitPlayer(1);
     }
 
     void Bullet_OnBulletDestruction(object sender,Bullet.BulletArgs e) {

@@ -257,6 +257,7 @@ GameObject:
   - component: {fileID: 3635711848154250573}
   - component: {fileID: 3635711848154250570}
   - component: {fileID: -4598317993569057450}
+  - component: {fileID: 840503536900208478}
   m_Layer: 0
   m_Name: Creeper
   m_TagString: Enemy
@@ -313,3 +314,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 0
   Health: 2
+--- !u!58 &840503536900208478
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3635711848154250572}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.4

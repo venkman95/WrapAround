@@ -6,6 +6,7 @@ using System;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
+    
     public enum EnemyType
     {
         Creeper,Turret,Tank
@@ -32,5 +33,20 @@ public class Enemy : MonoBehaviour
             OnEnemyDestruction(this,new EnemyArgs { enemy = gameObject });
             Destroy(gameObject);
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+        if (collision.transform.tag == "Player")
+        {
+            if (Camera.main.GetComponent<GameManager>().PlayerInvulnerability == false)
+            {
+                Camera.main.GetComponent<GameManager>().HitPlayer(Health);
+                Health = 0;
+                Hit();
+            }
+            
+        }
+        
     }
 }
