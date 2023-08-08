@@ -31,9 +31,24 @@ public class Enemy : MonoBehaviour
         
         if (Health <= 0) {
             OnEnemyDestruction(this,new EnemyArgs { enemy = gameObject });
+            Debris();
             Destroy(gameObject);
         }
     }
+
+    public void Debris()
+    {
+        SpriteRenderer[] Renderers;
+        Renderers = GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer Item in Renderers)
+        {
+            Debug.Log(Item.gameObject.transform.name);
+            Item.transform.parent = null;
+            Item.gameObject.AddComponent<DebrisMover>();
+            
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
