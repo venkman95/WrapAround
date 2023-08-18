@@ -411,6 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d1a95bb4035ee4696ab46fb21aba0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Circle: {fileID: 6841612129105485615, guid: b52008f211482fa48a43742f8d85969c, type: 3}
   PlayerAnimator: {fileID: 567877675}
   MaxPlayerHealth: 5
   PlayerInvulnerability: 0

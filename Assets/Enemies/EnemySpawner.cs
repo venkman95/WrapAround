@@ -29,7 +29,8 @@ public class EnemySpawner : MonoBehaviour
         switch (Manager.currentState) {
             case GameManager.State.SpawnEnemies:
                 Manager.currentState = GameManager.State.WaitForSpawning;
-                SpawnEnemies();
+                StartCoroutine(SpawnEnemies());
+                //SpawnEnemies();
                 break;
             case GameManager.State.WaitForSpawning:
                 Manager.currentState = GameManager.State.Combat;
@@ -46,16 +47,11 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public void SpawnEnemies() {
+    public IEnumerator SpawnEnemies() {
         for (int i = 0; i < Rounds+1; i++) {
-            float yPositionPixel = UnityEngine.Random.Range(0,Manager.maxHeight);
-            float xPositionPixel = UnityEngine.Random.Range(0,Manager.maxWidth);
-            Vector3 temp = new Vector3(xPositionPixel,yPositionPixel,0);
-            temp = Manager.camera.ScreenToWorldPoint(temp);
-            Vector3 spawnPoint = new Vector3(temp.x,temp.y,0);
-
-            Instantiate(SpawnableEnemies[UnityEngine.Random.Range(0,SpawnableEnemies.Count)],spawnPoint,transform.rotation);
+            StartCoroutine(Manager.TeleportToEmptyLocation(SpawnableEnemies[UnityEngine.Random.Range(0, SpawnableEnemies.Count)]));
+            yield return new WaitForSeconds(2f);
         }
-       ;
+        yield return null;
     }
 }

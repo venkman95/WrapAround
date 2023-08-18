@@ -20,8 +20,8 @@ public class DebrisMover : MonoBehaviour
         {
             Destroy(rigidbody2D);
         }
-        momentum = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1));
-        rotation = Random.Range(-1,1);
+        momentum = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+        rotation = Random.Range(-1f,1f);
     }
     // Update is called once per frame
     void Update()

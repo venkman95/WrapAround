@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField]
+    GameObject Circle;
     public static event EventHandler ClearBullets;
     //PlayerAnimator
     [SerializeField]
@@ -55,6 +57,7 @@ public class GameManager : MonoBehaviour
         //Debug.Log(playerSprite.sprite.rect.size);
         maxHeight = camera.pixelHeight;
         maxWidth = camera.pixelWidth;
+        
     }
     private void OnDestroy()
     {
@@ -107,6 +110,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        //StartCoroutine(TeleportToEmptyLocation());
         PlayerHealthCircle.fillAmount = (float)CurrentPlayerHealth / (float)MaxPlayerHealth;
         if (CurrentPlayerHealth <=0)
         {
@@ -122,6 +126,7 @@ public class GameManager : MonoBehaviour
         {
             CheckforWrap(enemy);
         }
+        
     }
 
     private void CheckforWrap(GameObject Object) {
@@ -203,4 +208,56 @@ public class GameManager : MonoBehaviour
         PlayerAnimator.Play("NormalState");
         yield return null;
     }
+     public IEnumerator TeleportToEmptyLocation(GameObject Spawn)
+    {
+        float maxRadius = 0;
+        float currentRadius = 0;
+        Vector3 bestLocation = Vector3.zero;
+        for (float x = 0; x <= maxWidth; x = x + 10)
+        {
+            for (float y = 0; y <= maxHeight;  y = y + 10)
+            {
+                
+                while (true)
+                {
+                    //GameObject Temp = Instantiate(Circle);
+                    Vector3 Temp = camera.ScreenToWorldPoint(new Vector3(x, y));
+                    //Temp.transform.position = camera.ScreenToWorldPoint(new Vector3(x,y));
+                    Temp = new Vector3(Temp.x, Temp.y, 0);
+                    if ((Player.transform.position.x - Temp.x) * (Player.transform.position.x - Temp.x) + (Player.transform.position.y - Temp.y) * (Player.transform.position.y - Temp.y) <= currentRadius * currentRadius)
+                    {
+                        break;
+                    }
+                    foreach (GameObject enemy in EnemyList)
+                    {
+                        if ((enemy.transform.position.x - Temp.x) * (enemy.transform.position.x - Temp.x) + (enemy.transform.position.y - Temp.y) * (enemy.transform.position.y - Temp.y) <= currentRadius * currentRadius)
+                        {
+                            break;
+                        }
+                    }
+                    foreach (GameObject bullet in BulletList)
+                    {
+                        if ((bullet.transform.position.x - Temp.x) * (bullet.transform.position.x - Temp.x) + (bullet.transform.position.y - Temp.y) * (bullet.transform.position.y - Temp.y) <= currentRadius * currentRadius)
+                        {
+                            break;
+                        }
+                    }
+                    currentRadius += .01f;
+                    if (currentRadius > maxRadius)
+                    {
+                        maxRadius = currentRadius;
+                        bestLocation = Temp;
+                    }
+                }
+
+            }
+        }
+        Instantiate(Spawn);
+        Spawn.transform.position = bestLocation;
+        Debug.Log(maxRadius);
+        Debug.Log(bestLocation);
+        yield return null;
+    }
+
+
 }
